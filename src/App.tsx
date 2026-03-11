@@ -16,10 +16,128 @@ import {
   Star,
   ShieldCheck,
   Building2,
-  Award
+  Award,
+  X,
+  ChevronDown
 } from 'lucide-react';
 
 // --- Components ---
+
+const Accordion = ({ title, children }: { title: string, children: React.ReactNode }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-slate-200">
+      <button 
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-5 flex justify-between items-center text-left font-bold text-slate-800 hover:text-brand-accent transition-colors group"
+      >
+        <span className="text-lg">{title}</span>
+        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} text-slate-400 group-hover:text-brand-accent`} />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pb-6 text-slate-600 text-sm space-y-4 leading-relaxed">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const PoliciesModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl overflow-hidden"
+          >
+            <div className="p-6 md:p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+              <h3 className="text-2xl font-serif text-slate-900">Información del Evento</h3>
+              <button 
+                onClick={onClose} 
+                className="p-2 hover:bg-slate-200 rounded-full transition-colors group"
+                aria-label="Cerrar"
+              >
+                <X className="w-6 h-6 text-slate-400 group-hover:text-slate-600" />
+              </button>
+            </div>
+            <div className="p-6 md:p-10 max-h-[75vh] overflow-y-auto custom-scrollbar">
+              <Accordion title="Precios y Formas de Pago">
+                <div className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                      <p className="text-slate-600 mb-1 italic">Si realizas tu inscripción entre el 15 de marzo y el 31 de mayo</p>
+                      <p className="text-2xl font-bold text-brand-primary">💰 US$160</p>
+                    </div>
+                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                      <p className="text-slate-600 mb-1 italic">Si realizas tu inscripción entre el 1 de junio y el 31 de julio</p>
+                      <p className="text-2xl font-bold text-brand-primary">💰 US$300</p>
+                    </div>
+                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                      <p className="text-slate-600 mb-1 italic">Si realizas tu inscripción entre el 1 de agosto y el 15 de octubre</p>
+                      <p className="text-2xl font-bold text-brand-primary">💰 US$400</p>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-slate-100">
+                    <p className="font-bold text-slate-800 mb-2">Forma de pago</p>
+                    <p>La inscripción al evento se confirma únicamente con el pago total del monto correspondiente al momento de la compra.</p>
+                  </div>
+                </div>
+              </Accordion>
+              <Accordion title="Políticas de Devolución">
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Confirmación de inscripción</p>
+                    <p>La inscripción al evento se confirma únicamente con el pago total del monto correspondiente al momento de la compra.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Cancelaciones por parte del participante</p>
+                    <p>Las inscripciones no son reembolsables una vez realizado el pago.</p>
+                    <p className="mt-2">En caso de no poder asistir, el participante podrá transferir su entrada a otra persona, notificándolo previamente a la organización.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Cambios de titularidad</p>
+                    <p>La transferencia de la inscripción a otra persona deberá notificarse al menos 72 horas antes del evento, proporcionando los datos del nuevo participante.</p>
+                    <p className="mt-2">La notificación debe enviarse al correo: <a href="mailto:drazoilafernandez@gmail.com" className="text-brand-accent font-bold hover:underline">drazoilafernandez@gmail.com</a></p>
+                  </div>
+                </div>
+              </Accordion>
+            </div>
+            <div className="p-6 bg-slate-50 border-t border-slate-100 text-center">
+              <button 
+                onClick={onClose}
+                className="px-8 py-3 bg-brand-primary text-white rounded-xl font-bold hover:bg-brand-accent transition-all"
+              >
+                Entendido
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +158,6 @@ const Navbar = () => {
             className={`h-12 w-auto transition-all ${isScrolled ? '' : 'brightness-0 invert'}`}
             referrerPolicy="no-referrer"
           />
-          <span className={`font-serif text-xl font-bold ${isScrolled ? 'text-brand-primary' : 'text-white'}`}>CodontouRD</span>
         </div>
         <div className="hidden md:flex items-center gap-8">
           <a href="#beneficios" className={`text-sm font-medium hover:text-brand-accent transition-colors ${isScrolled ? 'text-slate-600' : 'text-white/80'}`}>Beneficios</a>
@@ -96,6 +213,21 @@ const Hero = () => (
                   <div className="h-px w-full bg-white/10 my-3"></div>
                   <p className="text-brand-accent font-medium text-sm">Precio final US$400</p>
                   <p className="text-white/40 text-[10px] uppercase mt-2 tracking-widest">Tarifa de lanzamiento</p>
+                  
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      // We need to trigger the modal from here too. 
+                      // I'll make the state global or pass it down.
+                      // For now, I'll assume the user wants it in the registration form mostly,
+                      // but I'll add a scroll to registration or trigger the same modal.
+                      const event = new CustomEvent('open-policies');
+                      window.dispatchEvent(event);
+                    }}
+                    className="mt-4 text-[10px] font-bold text-brand-accent hover:text-white transition-colors uppercase tracking-[0.2em] underline decoration-brand-accent/30 underline-offset-4"
+                  >
+                    Ver precios y políticas
+                  </button>
                 </div>
               </div>
             </div>
@@ -137,7 +269,7 @@ const Problem = () => (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl md:text-5xl mb-8 leading-tight text-slate-900">
+        <h2 className="text-3xl md:text-5xl mb-8 leading-tight text-slate-900 tracking-tight">
           El paciente internacional no busca un "dentista"...
         </h2>
         <p className="text-lg text-slate-600 mb-6 italic border-l-4 border-brand-accent pl-6">
@@ -169,8 +301,8 @@ const Presentation = () => (
     <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-accent/5 skew-x-12 translate-x-1/2"></div>
     <div className="max-w-7xl mx-auto relative z-10">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-6xl mb-6">CodontouRD 2026</h2>
-        <p className="text-xl text-brand-accent font-medium tracking-widest uppercase">El puente entre tu consulta y el mundo</p>
+        <h2 className="text-4xl md:text-6xl mb-6 tracking-tight">CodontouRD 2026</h2>
+        <p className="text-xl text-brand-accent font-medium tracking-[0.2em] uppercase">El puente entre tu consulta y el mundo</p>
       </div>
       
       <div className="grid md:grid-cols-3 gap-8">
@@ -203,13 +335,13 @@ const Presentation = () => (
 const Urgency = () => (
   <section className="py-24 bg-brand-accent relative overflow-hidden">
     <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-      <h2 className="text-4xl md:text-6xl font-serif text-brand-primary mb-8">
+      <h2 className="text-4xl md:text-6xl font-serif text-brand-primary mb-8 tracking-tight">
         ¿Serás espectador o protagonista?
       </h2>
-      <p className="text-2xl text-brand-primary/80 mb-12 max-w-3xl mx-auto">
+      <p className="text-2xl text-brand-primary/80 mb-12 max-w-3xl mx-auto leading-relaxed">
         La República Dominicana ya es el destino #1 del Caribe. El mercado no espera.
       </p>
-      <a href="#registro" className="bg-brand-primary text-white px-12 py-5 rounded-full text-xl font-bold hover:bg-slate-800 transition-all shadow-2xl">
+      <a href="#registro" className="bg-brand-primary text-white px-12 py-5 rounded-full text-xl font-bold hover:bg-slate-800 transition-all shadow-2xl inline-block">
         PRE-REGÍSTRATE AHORA Y OBTÉN PRIORIDAD
       </a>
     </div>
@@ -224,43 +356,43 @@ const EventDetails = () => (
   <section id="detalles" className="section-padding bg-white">
     <div className="max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 gap-16 items-center">
-        <div className="space-y-8">
-          <h2 className="text-4xl md:text-5xl mb-8">Detalles del Congreso</h2>
-          <div className="space-y-6">
+        <div className="space-y-10">
+          <h2 className="text-4xl md:text-5xl mb-8 tracking-tight">Detalles del Congreso</h2>
+          <div className="space-y-8">
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
-                <Calendar className="text-brand-accent" />
+                <Calendar className="text-brand-accent w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm text-slate-500 uppercase tracking-widest font-bold">Fecha</p>
-                <p className="text-xl font-medium">Sábado 24 de octubre 2026</p>
+                <p className="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Fecha</p>
+                <p className="text-xl font-medium text-slate-900">Sábado 24 de octubre 2026</p>
               </div>
             </div>
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
-                <MapPin className="text-brand-accent" />
+                <MapPin className="text-brand-accent w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm text-slate-500 uppercase tracking-widest font-bold">Lugar</p>
-                <p className="text-xl font-medium">Centro de Convenciones Hotel Dominican Fiesta, Santo Domingo</p>
+                <p className="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Lugar</p>
+                <p className="text-xl font-medium text-slate-900 leading-snug">Centro de Convenciones Hotel Dominican Fiesta, Santo Domingo</p>
               </div>
             </div>
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
-                <Clock className="text-brand-accent" />
+                <Clock className="text-brand-accent w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm text-slate-500 uppercase tracking-widest font-bold">Horario</p>
-                <p className="text-xl font-medium">8:30 a.m. a 6:00 p.m.</p>
+                <p className="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Horario</p>
+                <p className="text-xl font-medium text-slate-900">8:30 a.m. a 6:00 p.m.</p>
               </div>
             </div>
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
-                <Globe className="text-brand-accent" />
+                <Globe className="text-brand-accent w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm text-slate-500 uppercase tracking-widest font-bold">Marco del Evento</p>
-                <p className="text-xl font-medium">Bolsa Turística del Caribe (BTC)</p>
+                <p className="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Marco del Evento</p>
+                <p className="text-xl font-medium text-slate-900">Bolsa Turística del Caribe (BTC)</p>
               </div>
             </div>
           </div>
@@ -283,8 +415,8 @@ const PreviousEvent = () => (
   <section className="section-padding bg-slate-50">
     <div className="max-w-7xl mx-auto">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl mb-4">Éxito de Nuestro Primer Encuentro</h2>
-        <p className="text-slate-600 max-w-2xl mx-auto">Revive el impacto del Primer Encuentro de Turismo Dental en RD. Una comunidad que ya está transformando la odontología con visión global.</p>
+        <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">Éxito de Nuestro Primer Encuentro</h2>
+        <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">Revive el impacto del Primer Encuentro de Turismo Dental en RD. Una comunidad que ya está transformando la odontología con visión global.</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -367,7 +499,7 @@ const Organizer = () => (
   </section>
 );
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ onShowPolicies }: { onShowPolicies: () => void }) => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', clinic: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -398,8 +530,8 @@ const RegistrationForm = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16">
           <div>
-            <h2 className="text-4xl md:text-6xl mb-8">Asegura tu lugar hoy</h2>
-            <p className="text-xl text-slate-400 mb-12">
+            <h2 className="text-4xl md:text-6xl mb-8 tracking-tight">Asegura tu lugar hoy</h2>
+            <p className="text-xl text-slate-400 mb-12 leading-relaxed">
               No pierdas la oportunidad de ser parte del evento que definirá el futuro de tu clínica.
             </p>
             
@@ -429,6 +561,16 @@ const RegistrationForm = () => {
                 <span className="text-xl text-slate-500 line-through">US$400</span>
               </div>
               <p className="text-sm text-slate-400 mt-4 italic">*Válido por tiempo limitado</p>
+              
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <button 
+                  type="button"
+                  onClick={onShowPolicies}
+                  className="text-xs font-bold text-brand-accent hover:text-white transition-colors uppercase tracking-widest hover:underline decoration-brand-accent/30 underline-offset-4"
+                >
+                  Ver precios y políticas
+                </button>
+              </div>
             </div>
           </div>
 
@@ -533,11 +675,7 @@ const Footer = () => (
             className="h-10 w-auto brightness-0 invert"
             referrerPolicy="no-referrer"
           />
-          <span className="font-serif text-2xl font-bold">CodontouRD</span>
         </div>
-        <p className="text-slate-400 text-sm leading-relaxed">
-          El encuentro cumbre para profesionales de la odontología que buscan expandir sus horizontes hacia el mercado global, integrando excelencia clínica con estrategias de turismo de salud de clase mundial.
-        </p>
       </div>
       
       <div>
@@ -587,7 +725,7 @@ const Footer = () => (
       </div>
     </div>
     <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 text-center text-slate-500 text-sm">
-      <p>© 2026 CodontouRD. Todos los derechos reservados. Impulsando la excelencia de la odontología dominicana hacia el escenario global.</p>
+      <p>© 2026 CodontouRD. Todos los derechos reservados.</p>
     </div>
   </footer>
 );
@@ -606,6 +744,14 @@ const WhatsAppFloat = () => (
 );
 
 export default function App() {
+  const [showPolicies, setShowPolicies] = useState(false);
+
+  useEffect(() => {
+    const handleOpenPolicies = () => setShowPolicies(true);
+    window.addEventListener('open-policies', handleOpenPolicies);
+    return () => window.removeEventListener('open-policies', handleOpenPolicies);
+  }, []);
+
   return (
     <div className="relative">
       <Navbar />
@@ -616,9 +762,10 @@ export default function App() {
       <EventDetails />
       <PreviousEvent />
       <Organizer />
-      <RegistrationForm />
+      <RegistrationForm onShowPolicies={() => setShowPolicies(true)} />
       <Footer />
       <WhatsAppFloat />
+      <PoliciesModal isOpen={showPolicies} onClose={() => setShowPolicies(false)} />
     </div>
   );
 }
