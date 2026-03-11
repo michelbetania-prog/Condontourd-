@@ -35,9 +35,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <img 
-            src="https://drive.google.com/uc?export=view&id=1E3vVDdeVjZ0vEKK0EKQ9ogFpCn46S8XO" 
+            src="https://lh3.googleusercontent.com/d/1VR7f0ZRQw_gbUEoBATTyOrg0sdKmGPAh" 
             alt="CodontouRD Logo" 
-            className="h-12 w-auto"
+            className={`h-12 w-auto transition-all ${isScrolled ? '' : 'brightness-0 invert'}`}
             referrerPolicy="no-referrer"
           />
           <span className={`font-serif text-xl font-bold ${isScrolled ? 'text-brand-primary' : 'text-white'}`}>CodontouRD</span>
@@ -283,19 +283,18 @@ const PreviousEvent = () => (
   <section className="section-padding bg-slate-50">
     <div className="max-w-7xl mx-auto">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl mb-4">Nuestra Trayectoria</h2>
-        <p className="text-slate-600 max-w-2xl mx-auto">Revive el impacto del Primer Encuentro de Turismo Dental en RD. Una comunidad que crece con visión global.</p>
+        <h2 className="text-4xl md:text-5xl mb-4">Éxito de Nuestro Primer Encuentro</h2>
+        <p className="text-slate-600 max-w-2xl mx-auto">Revive el impacto del Primer Encuentro de Turismo Dental en RD. Una comunidad que ya está transformando la odontología con visión global.</p>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         {/* Imágenes representativas del evento anterior */}
         {[
-          "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2070&auto=format&fit=crop"
+          "https://lh3.googleusercontent.com/d/1KTjlOVvJu_fg6OXBWrHiwSzmBfff_14i",
+          "https://lh3.googleusercontent.com/d/1FpiiTUpqgWbpwYLcbMAy14cRgnnJ5uUL",
+          "https://lh3.googleusercontent.com/d/1ZBxEqFSgRdAW8938ynDJFqS_piFMY6kV"
         ].map((url, i) => (
-          <div key={i} className="aspect-square bg-slate-200 rounded-2xl overflow-hidden group shadow-md">
+          <div key={i} className="aspect-video bg-slate-200 rounded-2xl overflow-hidden group shadow-md">
             <img 
               src={url} 
               alt={`Evento Anterior ${i + 1}`} 
@@ -304,17 +303,6 @@ const PreviousEvent = () => (
             />
           </div>
         ))}
-      </div>
-      
-      <div className="text-center mb-16">
-        <a 
-          href="https://drive.google.com/drive/folders/11n3P0ic54XLqyPtunHlTK4eRR6uUS7kf?usp=drive_link" 
-          target="_blank"
-          className="inline-flex items-center gap-2 text-brand-accent font-bold hover:underline"
-        >
-          Ver galería completa del evento anterior
-          <ArrowRight className="w-4 h-4" />
-        </a>
       </div>
       
       <div className="grid md:grid-cols-3 gap-8">
@@ -344,7 +332,7 @@ const Organizer = () => (
           {/* Foto de la organizadora Dra. Zoila Fernández */}
           <div className="aspect-[3/4] bg-slate-200 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
             <img 
-              src="https://drive.google.com/uc?export=view&id=1Yqf9LsNVputslKsMv4zGKfdncxAys4c0" 
+              src="https://lh3.googleusercontent.com/d/1Yqf9LsNVputslKsMv4zGKfdncxAys4c0" 
               alt="Dra. Zoila Fernández" 
               className="w-full h-full object-cover hover:scale-105 transition-all duration-700"
               referrerPolicy="no-referrer"
@@ -535,18 +523,61 @@ const RegistrationForm = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-slate-950 text-white py-20 px-6">
+  <footer id="footer" className="bg-slate-950 text-white py-20 px-6">
     <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-      <div className="col-span-1 md:col-span-2">
-        <div className="flex items-center gap-2 mb-6">
-          <div className="w-8 h-8 bg-brand-accent rounded flex items-center justify-center text-white font-bold">C</div>
+      <div>
+        <div className="flex items-center gap-3 mb-6">
+          <img 
+            src="https://lh3.googleusercontent.com/d/1VR7f0ZRQw_gbUEoBATTyOrg0sdKmGPAh" 
+            alt="CodontouRD Logo" 
+            className="h-10 w-auto brightness-0 invert"
+            referrerPolicy="no-referrer"
+          />
           <span className="font-serif text-2xl font-bold">CodontouRD</span>
         </div>
-        <p className="text-slate-400 max-w-md mb-8">
-          El evento líder en República Dominicana para la transformación global de la odontología. Uniendo ciencia, estrategia y turismo.
+        <p className="text-slate-400 text-sm leading-relaxed">
+          El encuentro cumbre para profesionales de la odontología que buscan expandir sus horizontes hacia el mercado global, integrando excelencia clínica con estrategias de turismo de salud de clase mundial.
         </p>
+      </div>
+      
+      <div>
+        <h4 className="font-bold mb-6 uppercase tracking-widest text-sm text-brand-accent">Enlaces Rápidos</h4>
+        <ul className="space-y-4 text-slate-400 text-sm">
+          <li><a href="#" className="hover:text-white transition-colors">Inicio</a></li>
+          <li><a href="#detalles" className="hover:text-white transition-colors">Agenda</a></li>
+          <li><a href="#organizadora" className="hover:text-white transition-colors">Ponentes</a></li>
+          <li><a href="#registro" className="hover:text-white transition-colors">Registro</a></li>
+          <li><a href="#footer" className="hover:text-white transition-colors">Contacto</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 className="font-bold mb-6 uppercase tracking-widest text-sm text-brand-accent">Información del Evento</h4>
+        <ul className="space-y-4 text-slate-400 text-sm">
+          <li>Congreso de Turismo Dental</li>
+          <li>República Dominicana</li>
+          <li>Año 2026</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="font-bold mb-6 uppercase tracking-widest text-sm text-brand-accent">Contacto</h4>
+        <ul className="space-y-4 text-slate-400 text-sm mb-8">
+          <li className="flex items-start gap-3">
+            <Phone className="w-4 h-4 shrink-0 text-brand-accent" />
+            <span>809-688-1130 / 809-913-4870</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <Mail className="w-4 h-4 shrink-0 text-brand-accent" />
+            <span>drazoilafernandez@gmail.com</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <MapPin className="w-4 h-4 shrink-0 text-brand-accent" />
+            <span>Av. Independencia 457, Santo Domingo.</span>
+          </li>
+        </ul>
         <div className="flex gap-4">
-          <a href="https://wa.me/18096881130" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-accent transition-all">
+          <a href="https://wa.me/18096881130" target="_blank" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-accent transition-all">
             <MessageCircle className="w-5 h-5" />
           </a>
           <a href="mailto:drazoilafernandez@gmail.com" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-accent transition-all">
@@ -554,37 +585,9 @@ const Footer = () => (
           </a>
         </div>
       </div>
-      
-      <div>
-        <h4 className="font-bold mb-6 uppercase tracking-widest text-sm text-brand-accent">Contacto</h4>
-        <ul className="space-y-4 text-slate-400">
-          <li className="flex items-start gap-3">
-            <Phone className="w-5 h-5 shrink-0 text-brand-accent" />
-            <span>809-688-1130 / 809-913-4870</span>
-          </li>
-          <li className="flex items-start gap-3">
-            <Mail className="w-5 h-5 shrink-0 text-brand-accent" />
-            <span>drazoilafernandez@gmail.com</span>
-          </li>
-          <li className="flex items-start gap-3">
-            <MapPin className="w-5 h-5 shrink-0 text-brand-accent" />
-            <span>Av. Independencia 457, Hotel Riazor, Suite 101, Odontolife, Santo Domingo.</span>
-          </li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 className="font-bold mb-6 uppercase tracking-widest text-sm text-brand-accent">Enlaces</h4>
-        <ul className="space-y-4 text-slate-400">
-          <li><a href="#beneficios" className="hover:text-white transition-colors">Beneficios</a></li>
-          <li><a href="#detalles" className="hover:text-white transition-colors">Detalles del Evento</a></li>
-          <li><a href="#organizadora" className="hover:text-white transition-colors">Organizadora</a></li>
-          <li><a href="#registro" className="hover:text-white transition-colors">Inscripción</a></li>
-        </ul>
-      </div>
     </div>
     <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 text-center text-slate-500 text-sm">
-      <p>© 2026 CodontouRD. Todos los derechos reservados. Diseñado para la excelencia odontológica.</p>
+      <p>© 2026 CodontouRD. Todos los derechos reservados. Impulsando la excelencia de la odontología dominicana hacia el escenario global.</p>
     </div>
   </footer>
 );
