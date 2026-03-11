@@ -209,7 +209,7 @@ const Hero = () => (
               <div className="bg-brand-primary/90 backdrop-blur-xl px-10 py-8 rounded-[1.4rem] text-center border border-white/10">
                 <p className="text-white/60 text-xs uppercase tracking-[0.2em] font-bold mb-2">Inscripción</p>
                 <div className="flex flex-col items-center">
-                  <span className="text-5xl md:text-6xl font-bold text-white tracking-tighter mb-1">US$155</span>
+                  <span className="text-5xl md:text-6xl font-bold text-white tracking-tighter mb-1">US$160</span>
                   <div className="h-px w-full bg-white/10 my-3"></div>
                   <p className="text-brand-accent font-medium text-sm">Precio final US$400</p>
                   <p className="text-white/40 text-[10px] uppercase mt-2 tracking-widest">Tarifa de lanzamiento</p>
@@ -557,7 +557,7 @@ const RegistrationForm = ({ onShowPolicies }: { onShowPolicies: () => void }) =>
             <div className="mt-16 p-8 bg-white/5 rounded-2xl border border-white/10">
               <p className="text-sm uppercase tracking-widest text-slate-500 mb-2">Inversión Especial</p>
               <div className="flex items-baseline gap-4">
-                <span className="text-5xl font-bold text-brand-accent">US$155</span>
+                <span className="text-5xl font-bold text-brand-accent">US$160</span>
                 <span className="text-xl text-slate-500 line-through">US$400</span>
               </div>
               <p className="text-sm text-slate-400 mt-4 italic">*Válido por tiempo limitado</p>
@@ -588,7 +588,7 @@ const RegistrationForm = ({ onShowPolicies }: { onShowPolicies: () => void }) =>
                   <h3 className="text-3xl font-serif mb-4">¡Registro Exitoso!</h3>
                   <p className="text-slate-600 mb-8">Te hemos enviado un correo con los detalles. Ahora puedes proceder al pago para confirmar tu cupo.</p>
                   <button className="w-full bg-brand-accent text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-primary transition-all shadow-lg flex items-center justify-center gap-2">
-                    PROCEDER AL PAGO (US$155)
+                    PROCEDER AL PAGO (US$160)
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </motion.div>
